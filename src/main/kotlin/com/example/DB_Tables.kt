@@ -3,7 +3,7 @@ package com.example
 import org.jetbrains.exposed.sql.Table
 
 object HealthDataTable : Table("health_data") {
-    val healthId = integer("id")
+    val id = integer("id")
     val heartRate = integer("heart_rate")
     val stepCount = integer("step_count")
     val timestamp = long("timestamp")
