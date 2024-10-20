@@ -9,14 +9,7 @@ import kotlin.system.exitProcess
 
 data class HealthData(val health_id: Int, val heart_rate: Int, val step_count: Int, val timestamp: Long)
 
-object HealthDataTable : Table("health_data") {
-    val healthId = integer("health_id")
-    val heartRate = integer("heart_rate")
-    val stepCount = integer("step_count")
-    val timestamp = long("timestamp")
-}
-
-fun `mqtt reading and database addition`() {
+fun mqttReadingAndDataBaseAddition () {
     val brokerUrl = "ssl://4dbbebee01cb4916af953cf932ac5313.s1.eu.hivemq.cloud:8883"
     val clientId = MqttClient.generateClientId()
     val mqttClient = MqttClient(brokerUrl, clientId)
@@ -36,7 +29,6 @@ fun `mqtt reading and database addition`() {
             val gson = Gson()
             val healthData = gson.fromJson(payload, HealthData::class.java)
 
-            connectToDatabase()
             insertToDatabase(healthData)
         }
 
